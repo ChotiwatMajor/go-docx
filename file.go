@@ -46,6 +46,7 @@ func NewFile() *File {
 					Space: "w",
 				},
 				Paragraph: make([]*Paragraph, 0),
+				Headers:   make([]*Header, 0),
 			},
 		},
 		DocRelation: DocRelation{
@@ -74,6 +75,17 @@ func (f *File) Write(writer io.Writer) (err error) {
 	defer zipWriter.Close()
 
 	return f.pack(zipWriter)
+}
+
+// AddHeader add new paragraph
+func (f *File) AddHeader() *Header {
+	h := &Header{
+		Data: make([]interface{}, 0),
+		file: f,
+	}
+
+	f.Document.Body.Headers = append(f.Document.Body.Headers, h)
+	return h
 }
 
 // AddParagraph add new paragraph

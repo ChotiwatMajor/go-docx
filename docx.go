@@ -17,4 +17,5 @@ type Document struct {
 type Body struct {
 	XMLName   xml.Name `xml:"w:body"`
 	Paragraph []*Paragraph
+	Headers   []*Header
 }
